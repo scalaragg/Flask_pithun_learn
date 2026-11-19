@@ -1,12 +1,9 @@
 from flask import Flask, request, render_template, redirect, url_for
 
-from database import get_teachers
+from database import Database
+
 
 app = Flask(__name__)
-
-USERS = {
-    "admin": "12345"
-}
 
 
 @app.route('/')
@@ -18,6 +15,7 @@ def index():
 def login():
     error = None
 
+
     if request.method == 'POST':
         username = request.form.get('username', '').strip()
         password = request.form.get('password', '')
@@ -25,37 +23,25 @@ def login():
         try:
             if not username or not password:
                 error = 'Заполните все поля'
-            elif username in USERS and USERS[username] == password:
-                return redirect(url_for('index'))
             else:
+                database = Database()
+                user = database.get_user(username)
+
+                if user and user['user_password'] == password:
+                    return redirect(url_for('profile'))
+
                 error = 'Неверное имя пользователя или пароль'
 
-        except Exception:
-            error = 'Ошибка при авторизации'
+        except Exception as exception:
+            error = f'Ошибка базы данных: {exception}'
 
     return render_template('login.html', error=error)
 
 
-@app.route('/user/<username>')
-def show_user_profile(username):
-    return render_template('profile.html', person=username)
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
 
 
-@app.route('/teachers')
-def teachers():
-    try:
-        teachers_list = get_teachers()
-        error = None
-    except Exception as exception:
-        teachers_list = []
-        error = str(exception)
-
-    return render_template(
-        'teachers.html',
-        teachers=teachers_list,
-        error=error
-    )
-
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080)

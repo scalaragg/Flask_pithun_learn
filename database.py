@@ -1,31 +1,27 @@
-import mysql.connector
+import pymysql
 
 
-def get_teachers():
-    connection = None
-    cursor = None
-
-    try:
-        connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="admin",
-            database="academy"
+class Database:
+    def __init__(self):
+        self.connection = pymysql.connect(
+            host='localhost',
+            user='root',
+            password='admin',
+            database='flask_auth',
+            cursorclass=pymysql.cursors.DictCursor
         )
 
-        cursor = connection.cursor()
+    def get_user(self, username):
+        try:
+            with self.connection.cursor() as cursor:
+                sql = """
+                    SELECT id, user_name, user_password
+                    FROM users
+                    WHERE user_name = %s
+                """
 
-        sql = "SELECT * FROM v_select_teacher"
-        cursor.execute(sql)
+                cursor.execute(sql, (username,))
+                return cursor.fetchone()
 
-        return cursor.fetchall()
-    finally:
-        if cursor is not None:
-            cursor.close()
-        if connection is not None:
-            connection.close()
-
-
-if __name__ == "__main__":
-    for row in get_teachers():
-        print(row)
+        finally:
+            self.connection.close()
