@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Profiles</title>
+    </head>
+    <body>
+        {% if person %}
+            <h1>Hello {{ person }}!</h1>
+        {% else %}
+            <h1>Hello, World!</h1>
+        {% endif %}
+        <p><a href="/teachers">Список преподавателей</a></p>
+        <p><a href="/login">Войти в аккаунт</a></p>
+    </body>
+</html>
