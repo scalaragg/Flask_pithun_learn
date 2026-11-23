@@ -1,13 +1,14 @@
-<html>
-<head>
-    <title>REGISTRATION</title>
-    </head>
-    <body>
-    <form method="post" action="/register">
-        <input type="text" name="reg_email" placeholder="укажите почту как логин" required>
-        <input type="password" name="reg_pass" placeholder="создайте пароль" required>
-        <button type="submit">подтвердить</button>
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><title>Регистрация</title></head>
+<body>
+    <h1>Регистрация</h1>
+    <form method="post" action="{{ url_for('register') }}">
+        <input type="email" name="reg_email" placeholder="Электронная почта" required>
+        <input type="password" name="reg_pass" placeholder="Создайте пароль" required>
+        <button type="submit">Зарегистрироваться</button>
     </form>
     {% if error %}<p>{{ error }}</p>{% endif %}
-    </body>
+    <p><a href="{{ url_for('login') }}">Уже есть аккаунт? Войти</a></p>
+</body>
 </html>

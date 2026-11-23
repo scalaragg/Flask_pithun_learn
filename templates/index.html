@@ -1,13 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>FLASK APP</title>
-</head>
-        <body>
-    <h1>добро пожаловать</h1>
-    <form method="post" action="/login">
-    <button type="submit">войти  </button>
-    </form>
-        <button>зарегистрироваться</button>
-        </body>
+<html lang="ru">
+<head><meta charset="UTF-8"><title>FLASK APP</title></head>
+<body>
+    <h1>Добро пожаловать</h1>
+    <p><a href="{{ url_for('login') }}">Войти</a></p>
+    <p><a href="{{ url_for('register') }}">Зарегистрироваться</a></p>
+</body>
 </html>

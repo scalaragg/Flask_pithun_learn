@@ -1,17 +1,27 @@
-# Flask + MySQL: авторизация
+# Flask + MySQL: регистрация и вход
 
-## Структура
+## Установка зависимостей
 
+В терминале из папки проекта выполните:
+
+```bash
+python -m pip install -r requirements.txt
 ```
-flask/
-├── app.py
-├── main.py
-├── database.py              
-├── schema.sql          # SQL для создания БД и таблицы
-├── README.md
-└── templates/
-    ├── index.html
-    ├── login.html
-    ├── profile.html
-    └── register.html
+
+## Создание базы данных
+
+Запустите MySQL и выполните весь файл `schema.sql` в MySQL Workbench или другом MySQL-клиенте.
+
+## Настройка подключения
+
+По умолчанию используются: `localhost`, пользователь `root`, пароль `admin`, база `flask_auth`.
+Если ваши данные отличаются, задайте переменные окружения `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`.
+
+## Запуск
+
+```bash
+python main.py
 ```
+
+Откройте http://127.0.0.1:8080. Главная страница и формы откроются даже без работающей MySQL.
+Для регистрации и входа MySQL должен быть запущен, а схема `schema.sql` должна быть выполнена.
