@@ -1,44 +1,12 @@
-<!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Авторизация</title>
-</head>
-<body>
-
-<h2>Авторизация</h2>
-
-{% if error %}
-    <p style="color: red;">{{ error }}</p>
-{% endif %}
-
-<form method="POST">
-
-    <label>Имя пользователя:(user)</label>
-    <br>
-
-    <input
-        type="text"
-        name="username"
-        required
-    >
-
-    <br><br>
-
-    <label>Пароль:(12345)</label>
-    <br>
-
-    <input
-        type="password"
-        name="password"
-        required
-    >
-
-    <br><br>
-
-    <button type="submit">Войти</button>
-
-</form>
-
-</body>
+    <title>LOGIN</title>
+    </head>
+    <body>
+    <form method="post" action="login.html">
+        <input type="text" name="class_name" placeholder="введите имя" required>
+        <input type="text" name="places" placeholder="введите имя" required>
+        <button type="submit">подтвердить</button>
+    </form>
+    </body>
 </html>
